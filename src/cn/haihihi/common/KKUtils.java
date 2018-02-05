@@ -2,10 +2,13 @@ package cn.haihihi.common;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.InputStream;
 import java.security.MessageDigest;
 import java.util.Calendar;
@@ -18,14 +21,71 @@ import org.w3c.dom.Document;
 
 /**
  * 
- * @author 李笔振 时间：2018-02-03 创建 封装一个经常使用的工具包，如写文件，复制文件等等常用操作
+ * @author 李笔振 时间：2018-02-03 创建 封装一个经常使用的工具包，如加密，复制文件等等常用操作
  */
 public class KKUtils {
 
 	public static void main(String[] args) throws Exception {
-
+		
 	}
 
+	/**
+	 * 将一行文字根据需要追加到文件后面
+	 * @param content 要追加的内容
+	 * @param file 文件
+	 * @param isAppend 是否追加到文件尾部
+	 */
+	public static void writeTextFile(String content,File file,boolean isAppend) {
+		FileWriter fw = null;
+		
+		BufferedWriter bw = null;
+
+		try {
+			fw = new FileWriter(file, isAppend);
+			bw = new BufferedWriter(fw);
+			bw.write(content);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				bw.flush();
+				bw.close();
+				fw.close();
+				System.out.println("writeContent success");
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+	}
+	
+	/**
+	 * 读一个文件的内容
+	 * @param file 文本文件
+	 * @return 返回改文件内容，按照行来读取
+	 */
+	public static String readerTextFile(File file) {
+		String content = "";
+		FileReader fileReader = null;
+		BufferedReader br = null;
+		try {
+			fileReader = new FileReader(file);
+			br = new BufferedReader(fileReader);
+			String s;
+			while ((s = br.readLine()) != null) {
+				content += s+"\r\n";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				br.close();
+				fileReader.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		return content;
+	}
 	
 	/**
 	 * 讲一个文件输入流写到一个新的文件上
