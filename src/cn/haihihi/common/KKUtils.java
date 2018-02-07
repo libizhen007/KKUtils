@@ -10,6 +10,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URLEncoder;
 import java.security.MessageDigest;
 import java.util.Calendar;
 import java.util.UUID;
@@ -17,15 +18,57 @@ import java.util.UUID;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.w3c.dom.Document;
 
 /**
  * 
- * @author 李笔振 时间：2018-02-03 创建 封装一个经常使用的工具包，如加密，复制文件等等常用操作
+ * @author 李笔振 创建时间：2018-02-03 是封装一个经常使用的工具包，如加密，复制文件等等常用操作。
  */
 public class KKUtils {
 
 	public static void main(String[] args) throws Exception {
+		
+		
+		/*int pageSize = 28;
+		for(int i=1;i<=pageSize;i++) {
+			org.jsoup.nodes.Document document = Jsoup.connect("http://newhouse.hn.fang.com/house/s/b9"+i+"/").get();
+			Elements houseList = document.getElementById("newhouse_loupai_list").getElementsByTag("ul").get(0).getElementsByTag("li");
+			for(Element house : houseList){
+				String houseName = house.getElementsByClass("nlcd_name").get(0).text();
+				writeTextFile(houseName+"\r\n",new File("D:\\视频+全景\\houseName.txt"),true);
+				
+			}
+		}*/
+		
+		/*String[] houseNames = readerTextFile(new File("D:\\视频+全景\\houseName.txt")).split("\r\n");
+		for(String name : houseNames) {
+			String target = name + " $$ " ;
+			String search = "https://m.fang.com/xf/hn/?keyword=" + URLEncoder.encode(name,"GBK");
+			
+			Element ul = Jsoup.connect(search).timeout(35000).userAgent("Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Mobile Safari/537.36").get().getElementById("xfContentList");
+			Elements lis = ul.getElementsByTag("li");
+			
+			if(lis.size() ==0) {
+				System.out.println("搜索为空，当前为：" + name);
+			}else {
+				Element houseLi = lis.get(0);
+				if(houseLi.getElementsByClass("qj360").size()!=0 || houseLi.getElementsByClass("video2").size()!=0) {
+					String link = "https:"+houseLi.getElementsByTag("a").get(0).attr("href");
+					target = target + link;
+					writeTextFile(target+"\r\n", new File("D:\\视频+全景\\houseName+link.txt"), true);
+				}
+				System.out.println("target=" + target);
+			}
+			try {
+				Thread.sleep(1000);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+		}*/
 		
 	}
 
@@ -51,7 +94,7 @@ public class KKUtils {
 				bw.flush();
 				bw.close();
 				fw.close();
-				System.out.println("writeContent success");
+				System.out.println("writeContent = "+ content +" success");
 			} catch (Exception e2) {
 				e2.printStackTrace();
 			}
