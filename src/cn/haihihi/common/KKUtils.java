@@ -31,45 +31,6 @@ public class KKUtils {
 
 	public static void main(String[] args) throws Exception {
 		
-		
-		/*int pageSize = 28;
-		for(int i=1;i<=pageSize;i++) {
-			org.jsoup.nodes.Document document = Jsoup.connect("http://newhouse.hn.fang.com/house/s/b9"+i+"/").get();
-			Elements houseList = document.getElementById("newhouse_loupai_list").getElementsByTag("ul").get(0).getElementsByTag("li");
-			for(Element house : houseList){
-				String houseName = house.getElementsByClass("nlcd_name").get(0).text();
-				writeTextFile(houseName+"\r\n",new File("D:\\视频+全景\\houseName.txt"),true);
-				
-			}
-		}*/
-		
-		/*String[] houseNames = readerTextFile(new File("D:\\视频+全景\\houseName.txt")).split("\r\n");
-		for(String name : houseNames) {
-			String target = name + " $$ " ;
-			String search = "https://m.fang.com/xf/hn/?keyword=" + URLEncoder.encode(name,"GBK");
-			
-			Element ul = Jsoup.connect(search).timeout(35000).userAgent("Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Mobile Safari/537.36").get().getElementById("xfContentList");
-			Elements lis = ul.getElementsByTag("li");
-			
-			if(lis.size() ==0) {
-				System.out.println("搜索为空，当前为：" + name);
-			}else {
-				Element houseLi = lis.get(0);
-				if(houseLi.getElementsByClass("qj360").size()!=0 || houseLi.getElementsByClass("video2").size()!=0) {
-					String link = "https:"+houseLi.getElementsByTag("a").get(0).attr("href");
-					target = target + link;
-					writeTextFile(target+"\r\n", new File("D:\\视频+全景\\houseName+link.txt"), true);
-				}
-				System.out.println("target=" + target);
-			}
-			try {
-				Thread.sleep(1000);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			
-		}*/
-		
 	}
 
 	/**
